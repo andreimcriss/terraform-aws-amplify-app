@@ -1,7 +1,7 @@
 # main.tf
 
 module "root_label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.16.0"
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git"
   namespace   = var.namespace
   stage       = var.stage
   name        = var.name
@@ -12,7 +12,7 @@ module "root_label" {
 }
 
 module "master_branch_label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.16.0"
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git"
   namespace   = var.namespace
   stage       = var.stage
   name        = var.name
@@ -23,7 +23,7 @@ module "master_branch_label" {
 }
 
 module "develop_branch_label" {
-  source      = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.16.0"
+  source      = "git::https://github.com/cloudposse/terraform-null-label.git"
   namespace   = var.namespace
   stage       = var.stage
   name        = var.name
@@ -36,7 +36,7 @@ module "develop_branch_label" {
 resource "aws_amplify_app" "this" {
   name                     = module.root_label.id
   description              = var.description != null ? var.description : "Amplify App for the github.com/${var.organization}/${var.repo} project."
-  repository               = "https://github.com/${var.organization}/${var.repo}"
+  repository               = "https://bitbucket.org/${var.organization}/${var.repo}"
   access_token             = var.gh_access_token
   enable_branch_auto_build = true
   build_spec               = var.build_spec_content != "" ? var.build_spec_content : null
